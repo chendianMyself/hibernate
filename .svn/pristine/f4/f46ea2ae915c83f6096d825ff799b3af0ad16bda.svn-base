@@ -1,0 +1,23 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping package="com.oracle.entity">
+		<class name="Role" table="t_role">
+			<id name="rid">
+				<generator class="native"/>
+			</id>
+			<property name="rname" />
+			<property name="rcode" />
+			
+			<!-- 
+				双向多对多应当在双向set中定义同一个表名称
+			 -->
+			<set name="userSet" table="t_user_role" cascade="save-update">
+				<key column="role_id"/>
+				<many-to-many column="user_id" class="User" />
+			</set>
+		</class>
+		
+	</hibernate-mapping>

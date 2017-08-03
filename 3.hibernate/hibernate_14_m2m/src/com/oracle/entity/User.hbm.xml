@@ -1,0 +1,27 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping package="com.oracle.entity">
+		<class name="User" table="t_user">
+			<id name="uid">
+				<generator class="native"/>
+			</id>
+			<property name="uname"/>
+			<property name="username"/>
+			<property name="password"/>
+			
+			
+			<!-- 如果这里是roleSet或者是roles
+				则在many2many上定义role-id
+				在key上自然是另一端的user_id
+			 -->
+			<set name="roleSet" table="t_user_role" cascade="save-update">
+				<key column="user_id"/>
+				<many-to-many class="Role" column="role_id"/>
+			</set>
+			
+		</class>
+		
+	</hibernate-mapping>
