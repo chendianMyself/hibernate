@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--设置log4j2的自身log级别为warn-->
+<configuration status="warn">
+
+    <appenders>
+        <console name="myConsoleLog" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+        </console>
+
+       
+		<!-- 单日志文件,新日志在原日志文件的基础内容后追加 -->
+        <File name="myFileLog" fileName="logs/warn.log" append="true">
+        	<PatternLayout pattern="[%-p] [%d{HH:mm:ss:SSS}] - %l - %m%n"/>
+        </File>
+
+        <RollingFile name="myRollingLogFile" fileName="logs/rolling.log"
+                     filePattern="logs/$${date:yyyy-MM}/rolling-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <SizeBasedTriggeringPolicy size="10KB"/>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <root level="info">
+            <appender-ref ref="myConsoleLog"/>
+            <appender-ref ref="myFileLog"/>
+            <appender-ref ref="myRollingLogFile"/>
+        </root>
+    </loggers>
+
+</configuration>

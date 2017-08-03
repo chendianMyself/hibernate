@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	
+
+	<package name="student" namespace="/student" extends="struts-default">
+		
+		<!-- 
+		如果不为action设置method,则默认进入execute方法
+		
+		动态方法名称,不需要为action指定method 
+		为action指定名称时,可以使用*作为通配符,通配符可以使用ognl表达式来匹配
+		如果ognl使用{0}匹配,表示匹配全部路径
+		如果ognl使用{1}匹配,表示只匹配*顶替的字符
+		-->
+		<!-- <action name="opt_*" class="com.oracle.action.StudentAction" method="{1}">
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+		</action> -->
+		
+		<!-- struts2推荐使用 -->
+		<action name="*" class="com.oracle.action.StudentAction" method="{1}">
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+			<result name="addPage">/WEB-INF/page/student/add.jsp</result>
+			<result name="updatePage">/WEB-INF/page/student/update.jsp</result>
+			
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">student_list</param>
+			</result>
+		
+		</action>
+		
+		
+	</package>
+
+	<package name="user" namespace="/user" extends="struts-default">
+		
+		<action name="list" class="com.oracle.action.StudentAction" method="list">
+			<!-- 如果返回页面不使用 / 开头,表示从项目的根目录  内的当前的命名空间下寻找 -->
+			<!-- 如果返回页面使用/开头,表示从项目的根目录查找资源 -->
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+		</action>
+		
+		<action name="delete" class="com.oracle.action.StudentAction" method="delete">
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</action>
+	</package>
+</struts>

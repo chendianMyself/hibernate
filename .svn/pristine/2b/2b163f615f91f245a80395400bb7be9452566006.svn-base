@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+	<!-- 启用开发模式,打印更多的异常信息 -->
+	<constant name="struts.devMode" value="true" /> 
+	<constant name="struts.action.extension" value="do" /> 
+
+    <package name="users" namespace="/" extends="struts-default" >
+    	
+    	<!-- 请求添加页面 -->
+    	<action name="addPage" class="com.oracle.action.UsersAction" method="addPage">
+    		<result>add.jsp</result>
+    	</action>
+    	
+    	<!-- 执行添加 -->
+    	<action name="add" class="com.oracle.action.UsersAction" method="add">
+    		<!-- 如果result不设置name属性,那么其值默认为success -->
+    		<result>success.jsp</result>
+    		<result name="abcd">failure.jsp</result>
+    	</action>
+    	
+    	<action name="delete" class="com.oracle.action.UsersAction" method="delete">
+    		<result>success.jsp</result>
+    		<result name="input">input.jsp</result>
+    	</action>
+    	<action name="list" class="com.oracle.action.UsersAction" method="list">
+    		<result>success.jsp</result>
+    	</action>
+    	<action name="updatePage" class="com.oracle.action.UsersAction" method="updatePage">
+    		<result>success.jsp</result>
+    	</action>
+    	<action name="update" class="com.oracle.action.UsersAction" method="update">
+    		<result >success.jsp</result>
+    	</action>
+    	
+    	
+    	
+    	
+    	<!-- 
+    		dispatcher为默认值
+    		注解模式下:
+    		dispatcher:请求转发,从action或jsp,保留当前request和response,跳转到其他的action或jsp
+    		redirect:重定向,从客户端发起一个新的请求,可以请求action,也可以请求jsp,抛弃原本的request和response
+    		
+    		配置文件模式下:
+    		chain:请求转发,从action跳转到另外一个action
+    		redirectAction:重定向,重定向到另外一个action
+    		
+    		重定向时,如果使用配置文件模式,可以在重定向的action地址中,省略 .action
+    		而使用注解模式开发,则不能省略.action
+    	 -->
+    	
+    	
+    	<action name="info" class="com.oracle.action.TestAction" method="info">
+    		<result name="infoPage" type="dispatcher">info.jsp</result><!-- 没有定义name的result,默认是success -->
+    		
+    	
+    		<result name="reInfoAction" type="redirectAction">info
+    			<!-- 重定向传的参数 -->
+    			<!-- <param name="currentPage">2</param> -->
+    		</result><!-- 没有定义name的result,默认是success -->
+    	</action>
+    	
+    	
+    	<action name="add1"  class="com.oracle.action.TestAction" method="add">
+    		<result name="reListAction" type="redirectAction">
+    			<!-- 指定重定向的action名称 -->
+    			<param name="actionName">list1</param>
+    			<!-- 动态从之前的request中获取参数并重定向 -->
+    			<!-- ognl表达式 -->
+    			<param name="currentPage">${currentPage}</param>
+    		</result>
+    	</action>
+    	
+    	<action name="list1" class="com.oracle.action.TestAction" method="list">
+    	
+    		<result>index.jsp</result>
+    	</action>
+    </package>
+
+</struts>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	
+
+	<package name="student" namespace="/student" extends="struts-default">
+		
+		<global-results>
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">abc!list</param>
+			</result>
+		</global-results>
+		
+		<!-- 
+		如果不为action设置method,则默认进入execute方法
+		
+		动态方法名称,不需要为action指定method 
+		struts1流传下来的动态方法名称匹配
+		需要先设置启用动态方法名称
+		struts.enable.DynamicMethodInvocation =true
+		为action指定一个名称匹配一个类
+		通过actionName  !  方法名称  .action  的方式,直接执行某一个action类中的指定方法
+		-->
+		<action name="abc" class="com.oracle.action.StudentAction">
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+		</action>
+		
+		
+	</package>
+
+	<package name="user" namespace="/user" extends="struts-default">
+		
+		<action name="list" class="com.oracle.action.StudentAction" method="list">
+			<!-- 如果返回页面不使用 / 开头,表示从项目的根目录  内的当前的命名空间下寻找 -->
+			<!-- 如果返回页面使用/开头,表示从项目的根目录查找资源 -->
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+		</action>
+		
+		<action name="delete" class="com.oracle.action.StudentAction" method="delete">
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</action>
+	</package>
+</struts>

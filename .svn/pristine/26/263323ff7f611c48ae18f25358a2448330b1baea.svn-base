@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<package name="myBasePackage" abstract="true" extends="struts-default">
+		
+		<interceptors>
+			<!-- 定义拦截器-->
+			<interceptor name="sessionInterceptor" class="com.oracle.intercepter.MySessionInterceptor"></interceptor>
+			
+			
+			<!-- 定义拦截器栈-->
+			<interceptor-stack name="defaultWithSessionInterceptor">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="sessionInterceptor"/>
+			</interceptor-stack>
+		</interceptors>
+        
+        <!-- 默认启动我们自定义的拦截器栈
+        	该栈包含struts默认的20个拦截器和我们自定义的session拦截器
+         -->
+		<default-interceptor-ref name="defaultWithSessionInterceptor"></default-interceptor-ref>
+		
+		<global-results>
+			<!-- 使用/开头,表示从项目的根目录查找指定资源 -->
+			<result name="noPurview">/noPurview.jsp</result>
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</global-results>
+	</package>
+
+
+	<package name="student" namespace="/student" extends="myBasePackage">
+		<action name="*" class="com.oracle.action.StudentAction" method="{1}">
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+			<result name="addPage">/WEB-INF/page/student/add.jsp</result>
+			<result name="updatePage">/WEB-INF/page/student/update.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="teacher" namespace="/teacher" extends="myBasePackage">
+		<action name="*" class="com.oracle.action.TeacherAction" method="{1}">
+			<result name="listPage">/WEB-INF/page/teacher/list.jsp</result>
+			<result name="addPage">/WEB-INF/page/teacher/add.jsp</result>
+			<result name="updatePage">/WEB-INF/page/teacher/update.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,53 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping >
+		<class name="com.oracle.entity.Country" table="t_country">
+			<id name="cid">
+				<generator class="native"/>
+			</id>
+			<property name="cname"/>
+			
+			<!-- 在orm映射文件中建立关联关系 -->
+			<!-- set标签的name表示在实体中,set集合的属性名称 -->
+			
+			
+			
+			<!-- 
+				none(默认值)
+				save-update:
+					添加或修改数据时,级联操作下级数据
+					当删除主数据时,会先取消下级数据的关联,然后删除主数据,不会删除子数据
+				delete:
+					删除主数据时,会先解除关联关系,然后删除子数据,再删除主数据
+				
+				
+				all:save-update + delete
+					添加数据或修改数据时,级联添加或修改下级数据
+					删除操作时,会级联操作删除下级数据
+				
+				delete-orphan
+				all-delete-orphan
+			
+			 -->
+			 
+			<!-- 
+			一对多关联默认使用懒加载,如果在session关闭前,没有对多这一方进行数据的调用操作
+			则不会查询多这方数据
+			
+			可以通过为set标签设置lazy="false"来关闭懒加载,关闭懒加载后
+			任何对主数据的查询操作,都会直接查询其子数据
+			 -->
+			<set name="provinceSet" cascade="delete-orphan" lazy="false">
+				<!-- key表示一对多中多的一方为了维护关系,而产生的外键名称 -->
+				<key column="country_id"/>
+				<!-- 一对多中,多的一方的数据类型 -->
+				<one-to-many class="com.oracle.entity.Province"/>
+			</set>
+			
+			
+		</class>
+		
+	</hibernate-mapping>

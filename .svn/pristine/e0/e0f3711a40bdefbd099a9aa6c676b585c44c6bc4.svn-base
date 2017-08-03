@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+  		
+<validators>
+	<!-- 设置需要验证的字段名称 -->
+	<!-- 默认情况下,错误的key与字段名称保持一致
+	所以如果使用域属性模型,则页面使用el表达式取值存在困难
+	 -->
+
+	<!-- 如果使用ActionName-validation.xml作为xml的文件名,表示对当前Action的所有方法启用验证 -->
+	<field name="student.name">
+		<!-- 验证类型requiredstring表示字符串不能为null且不能为"" -->
+		<field-validator type="requiredstring">
+		
+			<!--错误提示 -->
+			<message >学生姓名不能为空</message>
+		</field-validator>
+	</field>
+
+</validators>

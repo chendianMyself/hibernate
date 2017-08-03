@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+  		
+<validators>
+	<!-- 如果需要使用xml对action类中的某一个方法启用验证
+		需要使用ActionName-methodName-validation.xml作为文件名
+		那么指定methodName的action会启用验证
+	 -->
+	<field name="student.name">
+		<!-- 验证类型requiredstring表示字符串不能为null且不能为"" -->
+		<field-validator type="requiredstring">
+		
+			<!--错误提示 -->
+			<message >学生姓名不能为空</message>
+		</field-validator>
+	</field>
+	<field name="student.mobile"> 
+		<field-validator type="regex">
+			<!-- 将正则表达式定义到CDATA的元空间里, -->
+			<param name="regex">[CDATA[^1[34578]\d{9}$]]</param>
+			<!--错误提示 -->
+			<message >手机号码格式不正确</message>
+		</field-validator>
+	</field>
+
+</validators>

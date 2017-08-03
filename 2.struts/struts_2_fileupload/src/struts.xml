@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- extends="struts-default"
+		为默认值,但是必须显示的声明,否则程序无法正常启动
+	 -->
+	<package name="users" namespace="/" extends="struts-default">
+		<action name="simple" class="com.oracle.action.FileUploadAction" method="simple">
+			<result>success.jsp</result>
+		</action>
+		<action name="multi" class="com.oracle.action.MultiFileUploadAction" method="multi">
+			<result>success.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	
+
+	<package name="student" namespace="/student" extends="struts-default">
+		<global-results>
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</global-results>
+		
+		<action name="list" class="com.oracle.action.StudentAction" method="list">
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+		</action>
+		
+		<action name="delete" class="com.oracle.action.StudentAction" method="delete">
+		</action>
+		
+		<!-- 打开添加页面 -->
+		<action name="addPage" class="com.oracle.action.StudentAction" method="addPage">
+			<result name="addPage" >/WEB-INF/page/student/add.jsp</result>
+		
+		</action>
+		<action name="add" class="com.oracle.action.StudentAction" method="add">
+			<result name="input" >/WEB-INF/page/student/add.jsp</result>
+		</action>
+		
+		
+		<!-- 打开修改页面 -->
+		<action name="updatePage" class="com.oracle.action.StudentAction" method="updatePage">
+			<result name="addPage" >/WEB-INF/page/student/updatePage.jsp</result>
+		</action>
+		<action name="update" class="com.oracle.action.StudentAction" method="update">
+			<!-- <result name="reListAction" type="redirectAction">
+				<param name="actionName">list</param>
+			</result> -->
+		</action>
+		
+	</package>
+
+	<package name="user" namespace="/user" extends="struts-default">
+		
+		<action name="list" class="com.oracle.action.StudentAction" method="list">
+			<!-- 如果返回页面不使用 / 开头,表示从项目的根目录  内的当前的命名空间下寻找 -->
+			<!-- 如果返回页面使用/开头,表示从项目的根目录查找资源 -->
+			<result name="listPage">/WEB-INF/page/student/list.jsp</result>
+		</action>
+		
+		<action name="delete" class="com.oracle.action.StudentAction" method="delete">
+			<result name="reListAction" type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</action>
+	</package>
+</struts>

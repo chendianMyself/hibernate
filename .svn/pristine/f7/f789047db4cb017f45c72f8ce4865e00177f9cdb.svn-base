@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory >
+		<!-- JDBC连接四要素 -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://127.0.0.1:3306/hibernate</property>
+		<property name="connection.user">root</property>
+		<property name="connection.password">root</property>
+		
+		<!-- 显示执行的sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		
+		
+		
+		
+		<mapping resource="com/oracle/entity/Student.hbm.xml"/>
+	</session-factory>
+
+
+</hibernate-configuration>

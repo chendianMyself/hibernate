@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+	<!-- JDBC连接四要素 -->
+	<property name="connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
+	<property name="connection.url">
+		jdbc:mysql://127.0.0.1:3306/hibernate
+	</property>
+	<property name="connection.user">root</property>
+	<property name="connection.password">root</property>
+
+
+	<!-- 连接池最小大小 -->
+	<property name="hibernate.c3p0.min_size">5</property>
+	<!-- 连接池最大大小 -->
+	<property name="hibernate.c3p0.max_size">200</property>
+	<!-- 超时时间,获取连接失败达到超时时间后抛出异常 -->
+	<property name="hibernate.c3p0.timeout">30</property>
+	<!-- 最大处理数量 -->
+	<property name="hibernate.c3p0.max_statements">200</property>
+
+	<!-- 
+		设置方言为Mysql
+		翻译机制:设置方言后,存在特性的sql语句会被方言所翻译
+		比如:分页查询
+	-->
+	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+
+	<!-- 显示执行的sql语句 -->
+	<property name="hibernate.show_sql">true</property>
+	<!-- 格式化自动生成的sql语句 -->
+	<property name="format_sql">true</property>
+	<!-- session获取原则 -->
+	<!-- 
+	<property name="current_session_context_class">thread</property>
+	 -->
+
+	<!-- validate | update | create | create-drop -->
+
+	<!-- 
+		根据orm映射文件创建或修改表结构
+		
+		update表示如果表变更,则修改表(常用)
+		
+		validate每次启动程序,会检查表结构是否变更,如果与ORM不匹配,则抛出异常
+		
+		create表示每次启动程序,都会删除原表并创建新表
+		
+		create-drop表示每次启动程序,都会创建新表,每次程序终止就会删除创建的表
+	-->
+	<property name="hbm2ddl.auto">update</property>
+	
+	
+	
+	
+	<mapping resource="com/oracle/entity/Country.hbm.xml" />
+	<mapping resource="com/oracle/entity/Province.hbm.xml" />
+</session-factory>
+
+
+</hibernate-configuration>

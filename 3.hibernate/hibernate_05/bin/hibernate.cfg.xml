@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory >
+		<!-- JDBC连接四要素 -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://127.0.0.1:3306/hibernate</property>
+		<property name="connection.user">root</property>
+		<property name="connection.password">root</property>
+		
+		<!-- 显示执行的sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		
+		<!-- 
+			设置方言为Mysql
+			翻译机制:设置方言后,存在特性的sql语句会被方言所翻译
+			比如:分页查询
+		 -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		
+		
+		<mapping resource="com/oracle/entity/Student.hbm.xml"/>
+	</session-factory>
+
+
+</hibernate-configuration>

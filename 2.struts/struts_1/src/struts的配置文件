@@ -1,0 +1,15 @@
+
+
+1.struts-default.xml
+	struts默认的配置文件,用于定义各类拦截器和启用拦截器等
+
+2.default.properties
+	struts默认的属性配置文件,用于定义各类常量(设置struts附加功能开关或运行方式等)
+
+3.struts.xml
+	用户自定义的配置文件,用于配置自定义的action,result等
+	
+4.struts.properties
+	用户自定义的属性配置文件,用于修改默认的各类常量
+	
+5.web.xml

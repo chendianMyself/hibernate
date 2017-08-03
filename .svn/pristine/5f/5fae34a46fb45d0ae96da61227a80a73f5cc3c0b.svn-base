@@ -1,0 +1,63 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping >
+		<class name="com.oracle.entity.Country" table="t_country">
+			<id name="cid">
+				<generator class="native"/>
+			</id>
+			<property name="cname"/>
+			
+			<!-- 在orm映射文件中建立关联关系 -->
+			<!-- set标签的name表示在实体中,set集合的属性名称 -->
+			
+			
+			
+			<!-- 
+				尝试使用
+					delete(主数据)
+					delete(子数据)
+					主数据集合中remove(子数据)
+					save(主数据)
+					
+				none(默认值)
+				save-update:
+					添加或修改数据时,级联操作下级数据
+					当删除主数据时,会先取消下级数据的关联,然后删除主数据,不会删除子数据
+					从集合中移除子数据时,只会解除子数据与主数据的关联关系
+				delete:
+					从集合中移除子数据时,只会解除子数据与主数据的关联关系
+					删除主数据时,会先解除关联关系,然后删除子数据,再删除主数据
+				
+				
+				all:save-update + delete
+					添加数据或修改数据时,级联添加或修改下级数据
+					删除操作时,会级联操作删除下级数据
+				
+				delete-orphan:
+					与save-update和delete不同的是
+					从集合中移除子数据时,子数据的信息直接被删除,而不是仅仅解除关联关系
+					
+				all-delete-orphan:save-update+delete+delete-orphan
+					添加数据时,级联添加子数据
+					修改数据时,级联修改子数据
+					删除数据时,级联删除子数据
+					从主数据中移除一个子数据时,这个子数据直接被删除,而不是仅仅解除关联关系
+			
+			 -->
+			 
+			 
+			<set name="provinceSet" cascade="delete">
+				<!-- key表示一对多中多的一方为了维护关系,而产生的外键名称 -->
+				<key column="country_id"/>
+				<!-- 一对多中,多的一方的数据类型 -->
+				<one-to-many class="com.oracle.entity.Province"/>
+				
+			</set>
+			
+			
+		</class>
+		
+	</hibernate-mapping>
