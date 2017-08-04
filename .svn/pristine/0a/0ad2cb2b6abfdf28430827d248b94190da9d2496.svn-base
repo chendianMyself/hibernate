@@ -1,0 +1,17 @@
+m2o
+
+lazy:
+      		false:直接加载
+      		true:延迟加载
+      		extra:特别延迟加载
+      	fetch
+      		join:迫切左外连接
+      		select:普通select查询
+      		subselect :子查询方式
+			
+
+			
+			
+fetch="join|select"
+lazy="proxy|no-proxy|false"
+

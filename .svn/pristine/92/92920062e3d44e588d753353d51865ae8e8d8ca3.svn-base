@@ -1,0 +1,37 @@
+事务的4大特性ACID
+A:原子性(Atomicity)
+B:一致性(Consistency)
+C:隔离性(Isolation)
+D:持续性/永久性(Durability)
+
+
+
+
+读取未提交read uncommited
+
+
+可重复读 read committed
+
+	1.脏读
+
+	2.不可重复读
+
+
+		1.增
+		2.删
+			幻影现象
+		3.该
+
+	3.丢失修改
+	
+	4.虚读
+	
+	
+封锁机制:
+	乐观锁:版本号和时间戳
+	
+	悲观锁:
+		排他锁,X锁,写锁 for update
+		共享锁,S锁,读锁 lock in share mode
+	
+

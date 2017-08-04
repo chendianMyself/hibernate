@@ -1,0 +1,40 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping>
+		<class name="com.oracle.entity.Province" table="t_province">
+			<id name="pid">
+				<generator class="native"/>
+			</id>
+			<property name="pname" />
+			
+			
+			<!-- 
+				fetch:
+				join:通过左外连接查询,在查询province时直接将country信息一并查出
+				
+				select:默认值,通过标准sql语句查询
+				
+				
+				lazy:
+					true:开启懒加载
+					
+					false:关闭懒加载
+					
+					proxy:寻找关联目标的orm映射文件,检查该文件的class标签的lazy值
+					如果country的orm映射文件的class设置为false,那这里就是false
+					
+			 -->
+			<many-to-one 
+				name="country" 
+				column="country_id" 
+				class="com.oracle.entity.Country" 
+				fetch="join"
+				
+				cascade="save-update"
+				/>
+		</class>
+		
+	</hibernate-mapping>

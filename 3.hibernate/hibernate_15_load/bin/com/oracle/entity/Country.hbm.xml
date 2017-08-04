@@ -1,0 +1,22 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping >
+		<class name="com.oracle.entity.Country" table="t_country">
+			<id name="cid">
+				<generator class="native"/>
+			</id>
+			<property name="cname"/>
+			<set name="provinceSet" cascade="delete-orphan">
+				<!-- key表示一对多中多的一方为了维护关系,而产生的外键名称 -->
+				<key column="country_id"/>
+				<!-- 一对多中,多的一方的数据类型 -->
+				<one-to-many class="com.oracle.entity.Province"/>
+			</set>
+			
+			
+		</class>
+		
+	</hibernate-mapping>

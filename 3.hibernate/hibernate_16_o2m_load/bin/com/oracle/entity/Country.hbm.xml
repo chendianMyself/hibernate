@@ -1,0 +1,45 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping >
+		<class name="com.oracle.entity.Country" table="t_country">
+			<id name="cid">
+				<generator class="native"/>
+			</id>
+			<property name="cname"/>
+			
+			<!-- 
+				fetch:
+					join:迫切左外连接,通过left outer join ,使用一条sql语句
+					在查询主数据时,直接将子数据也一并查询出来
+				
+					select:默认值,需要使用子数据时,将当前主数据关联的所有子数据一并查出
+						查询列表时,如果需要所有的子集,则将会查询主数据数量的N+1次
+				
+				
+					subselect:在查询单一对象时,其效果与select完全相同
+						查询列表时,会先查询主数据,当需要使用子数据时,
+						通过select 子数据 where 主数据id in (主数据)
+						可以直接通过1条sql语句,查询出所有关联的子集
+						
+						不论主数据有多少条,如果需要子集,则将会查询2次数据库
+			 -->
+			
+			<!-- 
+				lazy:extra
+					特别懒加载,当程序中只使用该集合的数目,而不使用集合中的具体对象信息时
+					特别懒加载会通过聚合函数返回count信息
+			 -->
+			<set name="provinceSet" cascade="delete-orphan"   lazy="extra">
+				<!-- key表示一对多中多的一方为了维护关系,而产生的外键名称 -->
+				<key column="country_id"/>
+				<!-- 一对多中,多的一方的数据类型 -->
+				<one-to-many class="com.oracle.entity.Province"/>
+			</set>
+			
+			
+		</class>
+		
+	</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping>
+		<!-- class标签上定义的lazy=false,将影响该类在所有关联中的懒加载
+			一单class上的lazy=false,则所有相关该类的懒加载都将关闭
+		 -->
+		<class 
+			name="com.oracle.entity.Province" 
+			table="t_province" 
+			lazy="false">
+			
+			<id name="pid">
+				<generator class="native"/>
+			</id>
+			<property name="pname"/>
+		</class>
+		
+	</hibernate-mapping>

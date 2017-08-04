@@ -1,0 +1,30 @@
+<?xml version="1.0"  ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+	<hibernate-mapping>
+		<class name="com.oracle.entity.Province" table="t_province">
+			<id name="pid">
+				<generator class="native"/>
+			</id>
+			<property name="pname" />
+			
+			<!-- 多对一关联 -->
+			<!-- 
+				lazy:多对一在默认情况下使用延迟加载
+				
+				cascade
+				
+				class="xxx"可以省略
+			 -->
+			<many-to-one 
+				name="country" 
+				column="country_id" 
+				class="com.oracle.entity.Country" 
+				lazy="false"
+				cascade="save-update"
+				/>
+		</class>
+		
+	</hibernate-mapping>
